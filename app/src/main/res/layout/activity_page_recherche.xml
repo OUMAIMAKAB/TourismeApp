@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="@string/Recherchez_une_ville" />
+        android:hint="@string/Recherchez_une_ville"
+        android:drawableLeft="@drawable/icon_recherche"
+        />
 
 
 

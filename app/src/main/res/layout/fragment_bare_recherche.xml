@@ -10,10 +10,14 @@
     <EditText
         android:id="@+id/barreRecherche"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/Recherchez_une_ville"
-        />
+        android:drawableLeft="@drawable/icon_recherche"
+        android:background="@drawable/border_edit_text_page_recherche"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+          />
 
 </RelativeLayout>
