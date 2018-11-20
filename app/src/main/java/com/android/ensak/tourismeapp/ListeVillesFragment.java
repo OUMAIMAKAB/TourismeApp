@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,6 +45,12 @@ public class ListeVillesFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listeViewRechercheVille = (ListView) getView().findViewById(R.id.list_view_recherche_ville);
+        listeViewRechercheVille.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.onItemClick(parent,view,position,id);
+            }
+        });
     }
 
 
@@ -103,8 +110,10 @@ public class ListeVillesFragment extends Fragment {
         con = context;
     }
 
-    public interface OnFragmentInteractionListenerListeVilles {
-        public void onClick(String mode);
+
+
+    public interface OnFragmentInteractionListenerListeVilles extends AdapterView.OnItemClickListener {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id);
     }
 
 

@@ -15,4 +15,15 @@
         <item>khouribga</item>
     </string-array>
     <string name="ville">ville</string>
+    <string-array name="recherche_sur_Tourisme_App">
+        <item>a</item>
+        <item>ab</item>
+        <item>abc</item>
+        <item>ez</item>
+        <item>zf</item>
+        <item>dd</item>
+        <item>jk</item>
+        <item>zf</item>
+        <item>kg</item>
+    </string-array>
 </resources>

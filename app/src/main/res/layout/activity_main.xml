@@ -25,15 +25,47 @@
         android:layout_weight="1" />
 
     <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/button1_page_principale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rabat"
+        android:onClick="button_ville_page_principal"
+        />
+    <Button
+        android:id="@+id/button2_page_principale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fes"
+        android:onClick="button_ville_page_principal"
+        />
+
+                </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Rabat"/>
+
+        <Button
+            android:id="@+id/button3_page_principale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marakech"
+            android:onClick="button_ville_page_principal"
+            />
+        <Button
+            android:id="@+id/button4_page_principale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meknes"
+            android:onClick="button_ville_page_principal"
+            />
+
     </LinearLayout>
-
-
 
 </LinearLayout>

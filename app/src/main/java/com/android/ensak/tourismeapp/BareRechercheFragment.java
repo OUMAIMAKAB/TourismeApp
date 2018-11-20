@@ -22,6 +22,7 @@ public class BareRechercheFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     EditText editText;
+    String mode;
     public BareRechercheFragment() {
         // Required empty public constructor
     }
@@ -59,7 +60,7 @@ public class BareRechercheFragment extends Fragment {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClick("ville");
+                mListener.onClick(mode);
             }
         });
 
@@ -70,6 +71,10 @@ public class BareRechercheFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void setTextBarreRecherche(String s) {
+        editText.setHint(s);
     }
 
     /**
@@ -85,6 +90,8 @@ public class BareRechercheFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onClick(String mode);
     }
-
+    public void setMode(String mode){
+        this.mode = mode;
+    }
 
 }
