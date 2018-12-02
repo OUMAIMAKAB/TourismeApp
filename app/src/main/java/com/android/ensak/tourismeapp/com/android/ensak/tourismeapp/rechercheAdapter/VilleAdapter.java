@@ -1,4 +1,4 @@
-package com.android.ensak.tourismeapp;
+package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAdapter;
 
 
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.ensak.tourismeapp.R;
 
 public class VilleAdapter extends ArrayAdapter<String> {
 

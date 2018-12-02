@@ -4,19 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VilleActivity"
+    tools:context=".com.android.ensak.tourismeapp.rechercheActivity.VilleActivity"
     android:orientation="vertical">
-    <TextView
-     android:layout_width="match_parent"
-     android:layout_height="150dp"
-     android:background="#c116e9f4"
-        android:textAlignment="center"
-     android:id="@+id/text_view_page_ville_images"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/container_image_view_ville">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:id="@+id/text_view_page_ville_images"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
 
-     />
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.android.ensak.tourismeapp.BareRechercheFragment"
+        android:name="com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.BareRechercheFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

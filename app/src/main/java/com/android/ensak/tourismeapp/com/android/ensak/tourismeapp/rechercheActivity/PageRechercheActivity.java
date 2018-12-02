@@ -1,4 +1,4 @@
-package com.android.ensak.tourismeapp;
+package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity;
 
         import android.content.Context;
         import android.content.Intent;
@@ -15,14 +15,17 @@ package com.android.ensak.tourismeapp;
         import android.widget.TextView;
         import android.widget.Toast;
 
-        import org.w3c.dom.Text;
+        import com.android.ensak.tourismeapp.R;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.VilleActivity;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.ListeVillesFragment;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.listeSuggestionsFragment;
 
 public class PageRechercheActivity extends AppCompatActivity implements ListeVillesFragment.OnFragmentInteractionListenerListeVilles{
 
 
     FragmentManager fragmentManager;
     ListeVillesFragment listeVillesFragment;
-    listeSuggestionsFragment listeSuggestionsFragment;
+    com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.listeSuggestionsFragment listeSuggestionsFragment;
     Context context;
     FragmentActivity myContext;
     String[] tableNomVille ;
@@ -30,6 +33,7 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
     EditText editText;
     String [] table;
     String typePageRecherche;
+    String nomVille;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +41,14 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         editText=findViewById(R.id.barreRecherchePageRecherche);
         Intent intent = getIntent();
         Bundle bundle =intent.getExtras();
+
         typePageRecherche=bundle.getString("typePageRecherche");
+        nomVille=bundle.getString("nomVille");
         myContext= this;
+        context=this;
         listeVillesFragment =new ListeVillesFragment();
         listeSuggestionsFragment =new listeSuggestionsFragment();
-        listeVillesFragment.initContext(myContext);
+        listeVillesFragment.initContext(context);
         fragmentManager=getSupportFragmentManager();
         tableNomVille = getResources().getStringArray(R.array.villes);
         tableRechercheSurTourismeApp=getResources().getStringArray(R.array.recherche_sur_Tourisme_App);
@@ -53,11 +60,11 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         switch (typePageRecherche){
             case "ville":
                 editText.setHint("Recherchez sur Tourisme APP");
-                listeSuggestionsFragment.typeSuggestion("ville");
+                listeSuggestionsFragment.typeSuggestion("ville",nomVille);
                 table=tableRechercheSurTourismeApp;
                 break;
             case "Page Principale":
-                listeSuggestionsFragment.typeSuggestion("Page Principale");
+                listeSuggestionsFragment.typeSuggestion("Page Principale",null);
                 table=tableNomVille;
                 break;
 
@@ -96,7 +103,7 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
             case "ville":
                 LinearLayout linearLayout=(LinearLayout) view;
                 TextView textVie=(TextView) linearLayout.findViewById(R.id.barreRecherche2);
-                Toast.makeText(myContext, String.valueOf(position)+" "+textVie.getText(), Toast.LENGTH_LONG).show();
+                Toast.makeText(myContext, String.valueOf(position)+" "+textVie.getText()+" "+nomVille, Toast.LENGTH_LONG).show();
                 break;
             case "Page Principale":
 

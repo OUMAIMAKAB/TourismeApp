@@ -1,18 +1,18 @@
-package com.android.ensak.tourismeapp;
+package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.mainActivity;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements BareRechercheFragment.OnFragmentInteractionListener{
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.BareRechercheFragment;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.PageRechercheActivity;
+import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.VilleActivity;
+
+public class MainActivity extends AppCompatActivity implements BareRechercheFragment.OnFragmentInteractionListener {
 
     BareRechercheFragment fragment;
     Button button;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements BareRechercheFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragment= (BareRechercheFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
+        fragment = (BareRechercheFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
         fragment.setMode("Page Principale");
      //   button = (Button) findViewById(R.id.button_page_principale);
     }
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements BareRechercheFrag
         String nameVille= (String) ((Button) view).getText();
         Intent intent = new Intent(this,VilleActivity.class);
         intent.putExtra("nomVille",nameVille);
+       // intent.putExtra("imageVille",R.drawable.rabat);
         startActivity(intent);
     }
 }

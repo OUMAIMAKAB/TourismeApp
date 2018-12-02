@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.ensak.tourismeapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,15 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBr6ywY98m1OBpq2LWUODgnO6T17RLC9ts"/>
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".com.android.ensak.tourismeapp.mainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PageRechercheActivity" />
-        <activity android:name=".VilleActivity"></activity>
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.PageRechercheActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.VilleActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.ContainerActivity"></activity>
     </application>
 
 </manifest>

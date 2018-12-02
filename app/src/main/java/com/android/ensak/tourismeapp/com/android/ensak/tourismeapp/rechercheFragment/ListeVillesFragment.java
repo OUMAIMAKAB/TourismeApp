@@ -1,20 +1,18 @@
-package com.android.ensak.tourismeapp;
+package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAdapter.VilleAdapter;
 
 import java.util.ArrayList;
 

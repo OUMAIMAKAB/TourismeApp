@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity"
+    tools:context=".com.android.ensak.tourismeapp.mainActivity.MainActivity"
     android:orientation="vertical"
     >
     <!-- TODO  changer les images par un service après un certain délai -->
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.android.ensak.tourismeapp.BareRechercheFragment"
+        android:name="com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.BareRechercheFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
