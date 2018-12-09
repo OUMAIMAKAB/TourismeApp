@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.ensak.tourismeapp.R;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.ContainerActivity;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.MapActivity;
 
 import java.util.ArrayList;
 
@@ -111,6 +112,49 @@ public class listeSuggestionsFragment extends Fragment {
                         intent.putExtra("nomVille",nomVille);
                         startActivity(intent);
                     }
+                    if(textVi.getText().equals("Carte")){
+                        Intent intent=new Intent(getContext(),MapActivity.class);
+                        intent.putExtra("nomVille",nomVille);
+                        startActivity(intent);
+                    }
+                if(textVi.getText().equals("Hopitaux")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Hopitaux");
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Gastronomie")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Gastronomie");
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Artisanat")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Artisanat");
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Restaurants")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Restaurants");
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Transports")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Logements")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+
+                    intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+
+
 
                 }
 

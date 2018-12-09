@@ -38,10 +38,12 @@ public class ListeElmentsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         elementsListView=(ListView) getView().findViewById(R.id.liste_view_elements);
         elementsListView.setAdapter(listElementsAdapter);
+
     }
 /*
     public void changeContentListView(ListElementsAdapter listElementsAdapter){
         elementsListView.setAdapter(listElementsAdapter);
     }
 */
+
 }

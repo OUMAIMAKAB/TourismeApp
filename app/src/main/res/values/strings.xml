@@ -26,4 +26,95 @@
         <item>zf</item>
         <item>kg</item>
     </string-array>
+
+    <!-- Rabat -->
+    <string-array name="monumentsRabatNames">
+        <item>Tour Hassan</item>
+        <item>Mausolee Mohammed 5</item>
+        <item>Kasbah des Oudayas</item>
+        <item>Chellah</item>
+    </string-array>
+    <integer-array name="monumentsRabatDrawable">
+        <item>@drawable/tour_hassan_rabat</item>
+        <item>@drawable/mausolee_mohammed_5_rabat</item>
+        <item>@drawable/kasbah_des_oudayas_rabat</item>
+        <item>@drawable/chellah_rabat</item>
+    </integer-array>
+    <string-array name="monumentsRabatDescriptions">
+        <item>Tour Hassan:blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item>
+        <item>Mausolee Mohammed 5:blaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item>
+        <item>Kasbah des Oudayas:blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item>
+        <item>Chellah:blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item>
+    </string-array>
+
+    <!-- fin Rabat -->
+
+
+    <!-- Ville populaires -->
+
+    <string-array name="nomVillesPopulaires">
+        <item>agadir</item>
+        <item>azilal</item>
+        <item>casablanca</item>
+        <item>chefchawn</item>
+        <item>dakhla</item>
+        <item>el_jadida</item>
+        <item>essaourira</item>
+        <item>fes</item>
+        <item>ifran</item>
+        <item>marrakech</item>
+        <item>meknes</item>
+        <item>ouarzazate</item>
+        <item>rabat</item>
+        <item>saidia</item>
+        <item>tanger</item>
+        <item>tetouan</item>
+    </string-array>
+
+    <integer-array name="drawableVillesPopulaires">
+        <item>@drawable/agadir</item>
+        <item>@drawable/azilal</item>
+        <item>@drawable/casablanca</item>
+        <item>@drawable/chefchawn</item>
+        <item>@drawable/dakhla</item>
+        <item>@drawable/el_jadida</item>
+        <item>@drawable/essaouira</item>
+        <item>@drawable/fes</item>
+        <item>@drawable/ifran</item>
+        <item>@drawable/marrakech</item>
+        <item>@drawable/meknes</item>
+        <item>@drawable/ouarzazate</item>
+        <item>@drawable/rabat</item>
+        <item>@drawable/saidia</item>
+        <item>@drawable/tanger</item>
+        <item>@drawable/tetouan</item>
+    </integer-array>
+
+    <!-- Fin Villes populaires -->
+
+    <!-- Patrimoine de l'UNESCO -->
+    <string-array name="nomVillesPatrimoineUnesco">
+        <item>El_JADIDA</item>
+        <item>ESSAOUIRA</item>
+        <item>FES</item>
+        <item>MARRAKECH</item>
+        <item>MEKNES</item>
+        <item>RABAT</item>
+        <item>TETOUAN</item>
+
+    </string-array>
+    <integer-array name="drawablePatrimoineUnesco">
+        <item>@drawable/el_jadida2</item>
+        <item>@drawable/essaouira2</item>
+        <item>@drawable/fes2</item>
+        <item>@drawable/marrakech2</item>
+        <item>@drawable/meknes2</item>
+        <item>@drawable/rabat2</item>
+        <item>@drawable/tetouan2</item>
+    </integer-array>
+
+    <!-- fin Patrimoine de l'UNESCO -->
+
+
+
 </resources>

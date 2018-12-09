@@ -15,21 +15,19 @@ import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActi
 public class MainActivity extends AppCompatActivity implements BareRechercheFragment.OnFragmentInteractionListener {
 
     BareRechercheFragment fragment;
-    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragment = (BareRechercheFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
         fragment.setMode("Page Principale");
-     //   button = (Button) findViewById(R.id.button_page_principale);
     }
 
 
     @Override
     public void onClick(String mode)
     {
-        Toast.makeText(this,mode,Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent(this,PageRechercheActivity.class);
         intent.putExtra("typePageRecherche",mode);
         startActivity(intent);
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements BareRechercheFrag
         String nameVille= (String) ((Button) view).getText();
         Intent intent = new Intent(this,VilleActivity.class);
         intent.putExtra("nomVille",nameVille);
-       // intent.putExtra("imageVille",R.drawable.rabat);
         startActivity(intent);
     }
 }

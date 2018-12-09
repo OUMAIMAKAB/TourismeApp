@@ -12,13 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.simpleClasse.AppUtility;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.simpleClasse.VillesPopulairesTendances;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAdapter.villesPopulairesTendancesAdapter;
 
 import java.util.ArrayList;
 
 public class VillesPopulairesTendancesFragment extends Fragment {
-
     ListView listeView;
     ArrayList<VillesPopulairesTendances> villesPopulairesTendances;
     ArrayList<VillesPopulairesTendances> patrimoineUnesco;
@@ -44,38 +44,14 @@ public class VillesPopulairesTendancesFragment extends Fragment {
         villesPopulairesTendances=new ArrayList<VillesPopulairesTendances>();
         patrimoineUnesco=new ArrayList<VillesPopulairesTendances>();
 
-        if(choix.equals("villes_populaires")) {
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.agadir,"Agadir"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.azilal,"Azilal"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.casablanca,"Casablanca"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.chefchawn,"chefchawn"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.dakhla,"dakhla"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.el_jadida,"el_jadida"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.essaouira,"Essaourira"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.fes,"fes"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.ifran,"ifran"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.marrakech,"marrakech"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.meknes,"meknes"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.ouarzazate,"ouarzazate"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.rabat,"rabat"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.saidia,"saidia"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.tanger,"tanger"));
-            villesPopulairesTendances.add(new VillesPopulairesTendances(R.drawable.tetouan,"tetouan"));
-            villesPopulairesTendancesAdapter adapter = new villesPopulairesTendancesAdapter(getContext(), R.layout.layout_villes_populaires_tendances_adapter, villesPopulairesTendances);
+        if(choix.equals("villes_populaires")){
+            villesPopulairesTendancesAdapter adapter = new villesPopulairesTendancesAdapter(getContext(), R.layout.layout_villes_populaires_tendances_adapter, AppUtility.getAppUtility(context).getListeVillesPopulaires());
             listeView.setAdapter(adapter);
         }
         if(choix.equals("tendances")){
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.el_jadida2, "El_JADIDA"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.essaouira2,"ESSAOUIRA"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.fes2,"FES"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.marrakech2, "MARRAKECH"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.meknes2,"MEKNES"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.rabat2,"RABAT"));
-            patrimoineUnesco.add(new VillesPopulairesTendances(R.drawable.tetouan2,"TETOUAN"));
-            villesPopulairesTendancesAdapter adapter = new villesPopulairesTendancesAdapter(getContext(), R.layout.layout_villes_populaires_tendances_adapter, patrimoineUnesco);
+            villesPopulairesTendancesAdapter adapter = new villesPopulairesTendancesAdapter(getContext(), R.layout.layout_villes_populaires_tendances_adapter, AppUtility.getAppUtility(context).getListeVillesPatrimoineUnesco());
             listeView.setAdapter(adapter);
         }
-
     }
 
     public void changerAdapterList(villesPopulairesTendancesAdapter adapter){

@@ -37,11 +37,52 @@ public class VilleActivity extends AppCompatActivity implements BareRechercheFra
          switch(nomVille.toLowerCase()){
              case "rabat":
                  drawable=getResources().getDrawable(R.drawable.rabat);
-                 relativeLayout.setBackground(drawable);
                  break;
              case "meknes":
                  drawable=getResources().getDrawable(R.drawable.meknes);
-                 relativeLayout.setBackground(drawable);
+                 break;
+             case "agadir":
+                 drawable=getResources().getDrawable(R.drawable.agadir);
+                 break;
+             case "azilal":
+                 drawable=getResources().getDrawable(R.drawable.azilal);
+                 break;
+             case "casablanca" :
+                 drawable=getResources().getDrawable(R.drawable.casablanca);
+                 break;
+             case "chefchawn":
+                 drawable=getResources().getDrawable(R.drawable.chefchawn);
+                 break;
+             case "dakhla":
+                 drawable=getResources().getDrawable(R.drawable.dakhla);
+                 break;
+             case "el_jadida":
+                 drawable=getResources().getDrawable(R.drawable.el_jadida);
+                 break;
+             case "essaourira":
+                 drawable=getResources().getDrawable(R.drawable.essaouira);
+                 break;
+             case "fes":
+                 drawable=getResources().getDrawable(R.drawable.fes);
+                 break;
+             case "ifran":
+                 drawable=getResources().getDrawable(R.drawable.ifran);
+                 break;
+             case "marakech":
+                 drawable=getResources().getDrawable(R.drawable.marrakech);
+                 break;
+
+             case "ouarzazate":
+                 getResources().getDrawable(R.drawable.ouarzazate);
+                 break;
+             case "saidia":
+                 getResources().getDrawable(R.drawable.saidia);
+                 break;
+             case "tanger":
+                 getResources().getDrawable(R.drawable.tanger);
+                 break;
+             case "tetouan":
+                 getResources().getDrawable(R.drawable.tetouan);
                  break;
          }
         relativeLayout.setBackground(drawable);

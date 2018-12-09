@@ -19,6 +19,7 @@ package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAct
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.VilleActivity;
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.ListeVillesFragment;
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.listeSuggestionsFragment;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.simpleClasse.AppUtility;
 
 public class PageRechercheActivity extends AppCompatActivity implements ListeVillesFragment.OnFragmentInteractionListenerListeVilles{
 
@@ -50,7 +51,7 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         listeSuggestionsFragment =new listeSuggestionsFragment();
         listeVillesFragment.initContext(context);
         fragmentManager=getSupportFragmentManager();
-        tableNomVille = getResources().getStringArray(R.array.villes);
+        tableNomVille = AppUtility.getAppUtility(context).getNomVillesPopulaires();
         tableRechercheSurTourismeApp=getResources().getStringArray(R.array.recherche_sur_Tourisme_App);
         getSupportFragmentManager().beginTransaction().add(R.id.content_fragment_page_recherche,listeVillesFragment,"fragment2")
                 .add(R.id.content_fragment_page_recherche, listeSuggestionsFragment,"fragment1")
@@ -69,7 +70,12 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
                 break;
 
         }
-
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setFocusable(true);
+            }
+        });
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -30,8 +30,7 @@
         android:layout_marginLeft="100dp"
         android:layout_alignParentBottom="true"
         android:rating="4.0"
-
+        android:contextClickable="false"
       />
-
 
 </RelativeLayout>
