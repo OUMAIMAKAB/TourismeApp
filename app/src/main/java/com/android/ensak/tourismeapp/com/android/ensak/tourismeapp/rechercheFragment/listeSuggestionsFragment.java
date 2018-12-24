@@ -17,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleTransports;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.GlobalClass;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Monument;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.ContainerActivity;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.MapActivity;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.test.TestSuggestionActivity;
 
 import java.util.ArrayList;
 
@@ -47,15 +51,15 @@ public class listeSuggestionsFragment extends Fragment {
     }
 
 
-    public void typeSuggestion(String typeSuggestion,String nomVille) {
+    public void typeSuggestion(String typeSuggestion) {
         this.typeSuggestion=typeSuggestion;
         if(typeSuggestion.equals("ville")){
-            this.nomVille=nomVille;
+
             nameSuggestions.add("Carte");
             nameSuggestions.add("Transports");
             nameSuggestions.add("Hopitaux");
             nameSuggestions.add("Monuments");
-            nameSuggestions.add("Gastronomie");
+            nameSuggestions.add("Gastronomies");
         }else if(typeSuggestion.equals("Page Principale")){
             nameSuggestions.add("Villes Populaires");
             nameSuggestions.add("Tendances");
@@ -84,6 +88,11 @@ public class listeSuggestionsFragment extends Fragment {
                     nameSuggestions.add("Artisanat");
                     nameSuggestions.add("Restaurants");
                     nameSuggestions.add("Logements");
+                    nameSuggestions.add("Banques");
+                    nameSuggestions.add("Centre de Changes");
+                    nameSuggestions.add("Pharmacies");
+
+
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -109,48 +118,67 @@ public class listeSuggestionsFragment extends Fragment {
                     if(textVi.getText().equals("Monuments")){
                         Intent intent = new Intent(getContext(), ContainerActivity.class);
                         intent.putExtra("choix", "Monuments");
-                        intent.putExtra("nomVille",nomVille);
+                        //intent.putExtra("nomVille",nomVille);
                         startActivity(intent);
                     }
                     if(textVi.getText().equals("Carte")){
                         Intent intent=new Intent(getContext(),MapActivity.class);
-                        intent.putExtra("nomVille",nomVille);
+                        intent.putExtra("choix","Carte");
                         startActivity(intent);
                     }
-                if(textVi.getText().equals("Hopitaux")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
-                    intent.putExtra("choix", "Hopitaux");
-                    intent.putExtra("nomVille",nomVille);
-                    startActivity(intent);
-                }
-                if(textVi.getText().equals("Gastronomie")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
-                    intent.putExtra("choix", "Gastronomie");
-                    intent.putExtra("nomVille",nomVille);
-                    startActivity(intent);
-                }
                 if(textVi.getText().equals("Artisanat")){
                     Intent intent = new Intent(getContext(), ContainerActivity.class);
                     intent.putExtra("choix", "Artisanat");
-                    intent.putExtra("nomVille",nomVille);
+                    //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
                 }
+                if(textVi.getText().equals("Banques")){
+                    Intent intent = new Intent(getContext(), MapActivity.class);
+                    intent.putExtra("choix", "Banques");
+                    //intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Centre de Changes")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Centre de Changes");
+                    //intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Gastronomies")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Gastronomies");
+                    //intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Hopitaux")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Hopitaux");
+                    //intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+
                 if(textVi.getText().equals("Restaurants")){
                     Intent intent = new Intent(getContext(), ContainerActivity.class);
                     intent.putExtra("choix", "Restaurants");
-                    intent.putExtra("nomVille",nomVille);
+                    //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
                 }
                 if(textVi.getText().equals("Transports")){
                     Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Transports");
 
-                    intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
                 }
                 if(textVi.getText().equals("Logements")){
                     Intent intent = new Intent(getContext(), ContainerActivity.class);
-
-                    intent.putExtra("nomVille",nomVille);
+                    intent.putExtra("choix", "Logements");
+                    //intent.putExtra("nomVille",nomVille);
+                    startActivity(intent);
+                }
+                if(textVi.getText().equals("Pharmacies")){
+                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    intent.putExtra("choix", "Pharmacies");
+                    //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
                 }
 

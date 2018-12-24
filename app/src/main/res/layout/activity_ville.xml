@@ -10,6 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/container_image_view_ville">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/imageViewVille"
+            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +28,10 @@
             android:id="@+id/text_view_page_ville_images"
             android:layout_centerInParent="true"
             />
+
+
     </RelativeLayout>
+
 
     <fragment
         android:id="@+id/fragment1"

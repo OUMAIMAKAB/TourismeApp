@@ -8,22 +8,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.ensak.tourismeapp.R;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAdapter.ListElementsAdapter;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAdapter.ListMonumentsAdapter;
 
 public class ListeElmentsFragment extends Fragment {
 
     ListView elementsListView;
-    ListElementsAdapter listElementsAdapter;
+    ArrayAdapter listElementsAdapter;
 
     public ListeElmentsFragment() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-    public ListeElmentsFragment(ListElementsAdapter listElementsAdapter) {
+    public ListeElmentsFragment(ArrayAdapter listElementsAdapter) {
         this.listElementsAdapter=listElementsAdapter;
     }
 

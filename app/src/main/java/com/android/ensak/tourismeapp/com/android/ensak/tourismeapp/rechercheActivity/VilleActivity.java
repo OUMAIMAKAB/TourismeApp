@@ -5,19 +5,38 @@ import android.graphics.drawable.Drawable;
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleArtisanats;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleBanques;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleCentreDeChanges;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleGastronomies;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleHopitaux;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleLogements;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleMonuments;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVillePharmacies;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleRestaurants;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.ControllerRestVilleTransports;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.GlobalClass;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.mainActivity.MainActivity;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.BareRechercheFragment;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 
 public class VilleActivity extends AppCompatActivity implements BareRechercheFragment.OnFragmentInteractionListener{
 
     BareRechercheFragment fragment;
     Drawable drawable;
     TextView textView;
+    int positionList;
     String nomVille;
+    int idVille;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,62 +49,43 @@ public class VilleActivity extends AppCompatActivity implements BareRechercheFra
         Intent intent =getIntent();
         Bundle bundle;
         bundle = intent.getExtras();
-        nomVille= bundle.getString("nomVille");
-        textView.setText(nomVille);
+        positionList= bundle.getInt("positionList");
+        GlobalClass.idPositionVilleCourante=positionList;
+        nomVille=GlobalClass.listVilles.get(positionList).getName();
+        idVille=GlobalClass.listVilles.get(positionList).getId();
+       textView.setText(nomVille);
         RelativeLayout relativeLayout=findViewById(R.id.container_image_view_ville);
-       // Drawable drawable = context.getResources().getDrawable(listesVillesPopulairesTendances.get(position).getImageVille());
-         switch(nomVille.toLowerCase()){
-             case "rabat":
-                 drawable=getResources().getDrawable(R.drawable.rabat);
-                 break;
-             case "meknes":
-                 drawable=getResources().getDrawable(R.drawable.meknes);
-                 break;
-             case "agadir":
-                 drawable=getResources().getDrawable(R.drawable.agadir);
-                 break;
-             case "azilal":
-                 drawable=getResources().getDrawable(R.drawable.azilal);
-                 break;
-             case "casablanca" :
-                 drawable=getResources().getDrawable(R.drawable.casablanca);
-                 break;
-             case "chefchawn":
-                 drawable=getResources().getDrawable(R.drawable.chefchawn);
-                 break;
-             case "dakhla":
-                 drawable=getResources().getDrawable(R.drawable.dakhla);
-                 break;
-             case "el_jadida":
-                 drawable=getResources().getDrawable(R.drawable.el_jadida);
-                 break;
-             case "essaourira":
-                 drawable=getResources().getDrawable(R.drawable.essaouira);
-                 break;
-             case "fes":
-                 drawable=getResources().getDrawable(R.drawable.fes);
-                 break;
-             case "ifran":
-                 drawable=getResources().getDrawable(R.drawable.ifran);
-                 break;
-             case "marakech":
-                 drawable=getResources().getDrawable(R.drawable.marrakech);
-                 break;
+        ImageView imageView=findViewById(R.id.imageViewVille);
+        // Create default options which will be used for every
+        //  displayImage(...) call if no options will be passed to this method
 
-             case "ouarzazate":
-                 getResources().getDrawable(R.drawable.ouarzazate);
-                 break;
-             case "saidia":
-                 getResources().getDrawable(R.drawable.saidia);
-                 break;
-             case "tanger":
-                 getResources().getDrawable(R.drawable.tanger);
-                 break;
-             case "tetouan":
-                 getResources().getDrawable(R.drawable.tetouan);
-                 break;
-         }
-        relativeLayout.setBackground(drawable);
+        ImageLoader.getInstance().init(MainActivity.config); // Do it on Application start
+        // Then later, when you want to display image
+       ImageLoader.getInstance().displayImage(GlobalClass.urlServerImages+"/Capture1.PNG",  imageView); // Default options will be used
+       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ControllerRestVilleArtisanats controllerRestVilleArtisanats=ControllerRestVilleArtisanats.getInstanceControllerRestClass();
+        controllerRestVilleArtisanats.listVilleArtisanatsAsync(idVille);
+        ControllerRestVilleBanques controllerRestVilleBanques=ControllerRestVilleBanques.getInstanceControllerRestClass();
+        controllerRestVilleBanques.listVilleBanquesAsync(idVille);
+        ControllerRestVilleCentreDeChanges controllerRestVilleCentreDeChanges=ControllerRestVilleCentreDeChanges.getInstanceControllerRestClass();
+        controllerRestVilleCentreDeChanges.listVilleCentreDeChangesAsync(idVille);
+        ControllerRestVilleGastronomies controllerRestVilleGastronomies=ControllerRestVilleGastronomies.getInstanceControllerRestClass();
+        controllerRestVilleGastronomies.listVilleGastronomiesAsync(idVille);
+        ControllerRestVilleHopitaux controllerRestVilleHopitaux=ControllerRestVilleHopitaux.getInstanceControllerRestClass();
+        controllerRestVilleHopitaux.listVilleHopitauxAsync(idVille);
+        ControllerRestVilleLogements controllerRestVilleLogements=ControllerRestVilleLogements.getInstanceControllerRestClass();
+        controllerRestVilleLogements.listVilleLogementsAsync(idVille);
+        ControllerRestVilleMonuments controllerRestVilleMonuments=ControllerRestVilleMonuments.getInstanceControllerRestClass();
+        controllerRestVilleMonuments.listVilleMonumentsAsync(idVille);
+        ControllerRestVillePharmacies controllerRestVillePharmacies=ControllerRestVillePharmacies.getInstanceControllerRestClass();
+        controllerRestVillePharmacies.listVillePharmaciesAsync(idVille);
+        ControllerRestVilleRestaurants controllerRestVilleRestaurants=ControllerRestVilleRestaurants.getInstanceControllerRestClass();
+        controllerRestVilleRestaurants.listVilleRestaurantsAsync(idVille);
+        ControllerRestVilleTransports controllerRestVilleTransports=ControllerRestVilleTransports.getInstanceControllerRestClass();
+        controllerRestVilleTransports.listVilleTransportsAsync(idVille);
+
+
+       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     @Override
@@ -94,13 +94,13 @@ public class VilleActivity extends AppCompatActivity implements BareRechercheFra
         Toast.makeText(this,mode,Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this,PageRechercheActivity.class);
         intent.putExtra("typePageRecherche",mode);
-        intent.putExtra("nomVille",nomVille.toLowerCase());
+        //intent.putExtra("nomVille",nomVille.toLowerCase());
         startActivity(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        fragment.setTextBarreRecherche(" Que recherches-tu sur "+ nomVille +" ?");
+        fragment.setTextBarreRecherche(" Que recherches-tu sur "+ nomVille+" ?");
     }
 }

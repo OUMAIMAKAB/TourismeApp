@@ -20,6 +20,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.ensak.tourismeapp.R;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.GlobalClass;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Banque;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.CentreDeChange;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.simpleClasse.LatitudeLongitude;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.test.TestSuggestionActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -48,7 +53,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int ERROR_DIALOG_REQUEST = 9001;
     GoogleMap mgoogleMap;
     GoogleApiClient googleApiClient;
-    String nomVille;
+    String choix;
+    ArrayList<LatitudeLongitude> listPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +63,41 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (googleServicesAvailable()) {
             Toast.makeText(this, "Perfect!!!!", Toast.LENGTH_LONG).show();
             setContentView(R.layout.fragment_map);
+
             Intent intent=getIntent();
             Bundle bundle=intent.getExtras();
-            nomVille=bundle.getString("nomVille");
+            choix=bundle.getString("choix");
+            afficherMarkerSelonChoix(choix);
             initMap();
+
         } else {
             //no google maps layout
+        }
+    }
+
+    private void afficherMarkerSelonChoix(String choix) {
+        listPosition=new ArrayList<LatitudeLongitude>();
+        switch (choix){
+
+            case "Carte":
+                double latitude=GlobalClass.listVilles.get(GlobalClass.idPositionVilleCourante).getLatitude();
+                double longitude=GlobalClass.listVilles.get(GlobalClass.idPositionVilleCourante).getLongitude();
+                listPosition.add(new LatitudeLongitude(latitude,longitude,GlobalClass.listVilles.get(GlobalClass.idPositionVilleCourante).getName(),11));
+                break;
+            case "Banques":
+                int nombreBanques=GlobalClass.listVilleBanques.size();
+                Toast.makeText(this,"size:"+nombreBanques, Toast.LENGTH_LONG).show();
+                for (Banque banque:GlobalClass.listVilleBanques
+                     ) {
+                    listPosition.add(new LatitudeLongitude(banque.getLatitude(),banque.getLongitude(),banque.getName(),17));
+                }
+                break;
+            case "Centre de Changes":
+                int nombreCentreDeChanges=GlobalClass.listVilleCentreDeChanges.size();
+                for (CentreDeChange centreDeChange: GlobalClass.listVilleCentreDeChanges) {
+                    listPosition.add(new LatitudeLongitude(centreDeChange.getLatitude(),centreDeChange.getLongitude(),centreDeChange.getName(),17));
+                }
+                break;
         }
     }
 
@@ -94,30 +129,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mgoogleMap = googleMap;
         //goToLocation(33.9691399, -6.9970062, 10);
-        Geocoder gc = new Geocoder(this);
-        List<Address> list = new ArrayList<>();
-        try {
-            list = gc.getFromLocationName(nomVille.toLowerCase(), 1);
-        } catch (IOException e) {
+        for (LatitudeLongitude latitudeLongitude: listPosition
+             ) {
+          goToLocation(latitudeLongitude.getLatitude(),latitudeLongitude.getLongitude(),latitudeLongitude.getZoom());
+            MarkerOptions markerOptions = new MarkerOptions().title(latitudeLongitude.getName())
+                    .position(new LatLng(latitudeLongitude.getLatitude(), latitudeLongitude.getLongitude()))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+            marker = mgoogleMap.addMarker(markerOptions);
 
         }
 
-        //  gc.getFromLocationName(location,100);
+
+        mgoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if(choix.equals("Carte")){
+                    marker.showInfoWindow();
+                    Toast.makeText(getApplicationContext(), "you click me" + marker.getTitle(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), TestSuggestionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
-        Address address=list.get(0);
-        String locality = address.getLocality();
-        double lat = address.getLatitude();
-        double lng = address.getLongitude();
-        goToLocation(lat, lng, 10);
-        if (marker != null) {
-            marker.remove();
-        }
-        MarkerOptions markerOptions = new MarkerOptions().title(locality)
-                .position(new LatLng(lat, lng))
-                .snippet("hello I am here")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-        marker = mgoogleMap.addMarker(markerOptions);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

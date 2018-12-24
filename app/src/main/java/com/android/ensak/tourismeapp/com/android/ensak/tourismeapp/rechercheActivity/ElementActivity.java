@@ -20,7 +20,7 @@ TextView descriptionElement;
         setContentView(R.layout.activity_element);
         Intent intent =getIntent();
         Bundle bundle=intent.getExtras();
-        Element element= (Element) bundle.getSerializable("element");
+        Element element= (Element) bundle.getSerializable("monument");
         imageView=findViewById(R.id.activity_element_image_view);
         titleElement=findViewById(R.id.activity_element_name);
         descriptionElement=findViewById(R.id.activity_element_description);

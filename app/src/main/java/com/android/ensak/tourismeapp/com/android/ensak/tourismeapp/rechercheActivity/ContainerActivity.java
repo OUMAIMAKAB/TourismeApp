@@ -38,13 +38,13 @@ public class ContainerActivity extends AppCompatActivity implements VillesPopula
         context=this;
         Bundle bundle =intent.getExtras();
         choix =bundle.getString("choix");
-        nomVille=bundle.getString("nomVille");
+        //nomVille=bundle.getString("nomVille");
         appUtility=AppUtility.getAppUtility(context);
         resultChoixFragmentSuggestion=ResultChoixFragmentSuggestion.getResultChoixFragmentSuggestion(context);
         FragmentManager fragmentManager = getSupportFragmentManager();
         resultChoixFragmentSuggestion.setFragmentManager(fragmentManager);
         resultChoixFragmentSuggestion.setChoix(choix);
-        resultChoixFragmentSuggestion.setNomVille(nomVille);
+        //resultChoixFragmentSuggestion.setNomVille(nomVille);
         resultChoixFragmentSuggestion.getFragmentSuggestion();
 
     }

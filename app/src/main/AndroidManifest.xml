@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Include following permission if you want to cache images on SD card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +36,15 @@
         <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.ContainerActivity" />
         <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.TransportActivity" />
         <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.LogementActivity" />
-        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.ElementActivity"></activity>
+        <activity android:name=".com.android.ensak.tourismeapp.ControllerRest.Main2TestActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.ElementActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.test.TestSuggestionActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.MonumentActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.ArtisanatActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.GastronomieActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.HopitalActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.PharmacieActivity" />
+        <activity android:name=".com.android.ensak.tourismeapp.rechercheActivity.RestaurantActivity"></activity>
     </application>
 
 </manifest>

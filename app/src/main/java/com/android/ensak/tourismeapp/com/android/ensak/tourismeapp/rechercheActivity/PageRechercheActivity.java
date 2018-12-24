@@ -44,7 +44,7 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         Bundle bundle =intent.getExtras();
 
         typePageRecherche=bundle.getString("typePageRecherche");
-        nomVille=bundle.getString("nomVille");
+        //nomVille=bundle.getString("nomVille");
         myContext= this;
         context=this;
         listeVillesFragment =new ListeVillesFragment();
@@ -61,11 +61,11 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         switch (typePageRecherche){
             case "ville":
                 editText.setHint("Recherchez sur Tourisme APP");
-                listeSuggestionsFragment.typeSuggestion("ville",nomVille);
+                listeSuggestionsFragment.typeSuggestion("ville");
                 table=tableRechercheSurTourismeApp;
                 break;
             case "Page Principale":
-                listeSuggestionsFragment.typeSuggestion("Page Principale",null);
+                listeSuggestionsFragment.typeSuggestion("Page Principale");
                 table=tableNomVille;
                 break;
 

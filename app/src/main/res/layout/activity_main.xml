@@ -42,14 +42,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="button_ville_page_principal"
-            android:text="Rabat" />
+            android:text="@string/rabat" />
 
         <Button
             android:id="@+id/button2_page_principale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="button_ville_page_principal"
-            android:text="Fes" />
+            android:text="@string/fes" />
 
     </LinearLayout>
 
@@ -66,16 +66,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="button_ville_page_principal"
-            android:text="Marakech" />
+            android:text="@string/marrakech" />
 
         <Button
             android:id="@+id/button4_page_principale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="button_ville_page_principal"
-            android:text="Meknes" />
+            android:text="@string/meknes" />
 
     </LinearLayout>
 
     <include layout="@layout/sub_layout_menu_bas_principale"/>
+
+
 </RelativeLayout>

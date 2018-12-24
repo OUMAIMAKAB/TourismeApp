@@ -115,6 +115,9 @@
 
     <!-- fin Patrimoine de l'UNESCO -->
 
-
+    <string name="rabat">RABAT</string>
+    <string name="fes">FES</string>
+    <string name="marrakech">MARRAKECH</string>
+    <string name="meknes">MEKNES</string>
 
 </resources>
