@@ -24,9 +24,24 @@ public class HopitalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hopital);
         Intent intent =getIntent();
         Bundle bundle=intent.getExtras();
-        Hopital hopital= (Hopital) bundle.getSerializable("hopital");
+        String nomHopital=bundle.getString("nomHopital");
+        Hopital hopital=getHopital(nomHopital);
+      //  Hopital hopital= (Hopital) bundle.getSerializable("hopital");
 
         titleElement=findViewById(R.id.activity_hopital_name);
         titleElement.setText(hopital.getName());
     }
+
+    private Hopital getHopital(String nomHopital) {
+        Hopital hopital=new Hopital();
+        for (Hopital hopital2 : GlobalClass.listVilleHopitals
+             ) {
+            if(hopital2.getName().equals(nomHopital)){
+                hopital=hopital2;
+                break;
+            }
+        }
+        return hopital;
+    }
+
 }

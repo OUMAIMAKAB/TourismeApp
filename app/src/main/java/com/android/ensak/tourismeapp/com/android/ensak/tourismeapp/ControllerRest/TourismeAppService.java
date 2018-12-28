@@ -1,5 +1,7 @@
 package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest;
 
+import android.telecom.Call;
+
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Artisanat;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Banque;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.CentreDeChange;
@@ -27,7 +29,7 @@ import retrofit.http.Query;
 
 public interface TourismeAppService {
 
-    public static final String ENDPOINT = "http://192.168.1.4:8085/tourismeApp";
+    public static final String ENDPOINT = "http://192.168.1.2:8085/tourismeApp";
 
     @GET("/villes/{idVille}/artisanats/")
     void listVilleArtisanatsAsync(@Path("idVille") int idVille,Callback<List<Artisanat>> callback);
@@ -61,6 +63,12 @@ public interface TourismeAppService {
 
     @GET("/villes/")
     void listVilleAsync(Callback<List<Ville>> callback);
+
+    @GET("/villes/villesTouristiques/")
+    void listVilleTouristiquesAsync(Callback<List<Ville>> callback);
+
+    @GET("/villes/villesInUnesco/")
+    void listVilleInUnescoAsync(Callback<List<Ville>> callback);
 
     @GET("/utilisateurs/")
     void listUtilisateursAsync(Callback<List<Utilisateur>> callback);

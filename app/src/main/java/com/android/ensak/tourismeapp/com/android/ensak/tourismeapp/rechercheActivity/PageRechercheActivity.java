@@ -16,6 +16,9 @@ package com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheAct
         import android.widget.Toast;
 
         import com.android.ensak.tourismeapp.R;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.GlobalClass;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Monument;
+        import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Ville;
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheActivity.VilleActivity;
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.ListeVillesFragment;
         import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.rechercheFragment.listeSuggestionsFragment;
@@ -30,7 +33,7 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
     Context context;
     FragmentActivity myContext;
     String[] tableNomVille ;
-    String[] tableRechercheSurTourismeApp;
+    String[] tableRechercheSurTourismeApp=new String[GlobalClass.listVilleMonuments.size()];;
     EditText editText;
     String [] table;
     String typePageRecherche;
@@ -52,7 +55,17 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
         listeVillesFragment.initContext(context);
         fragmentManager=getSupportFragmentManager();
         tableNomVille = AppUtility.getAppUtility(context).getNomVillesPopulaires();
-        tableRechercheSurTourismeApp=getResources().getStringArray(R.array.recherche_sur_Tourisme_App);
+       //tableRechercheSurTourismeApp=getResources().getStringArray(R.array.recherche_sur_Tourisme_App);
+
+        int indexListMonuments=0;
+        for (Monument monument:GlobalClass.listVilleMonuments) {
+
+            tableRechercheSurTourismeApp[indexListMonuments]=GlobalClass.listVilleMonuments.get(indexListMonuments).getName();
+
+            indexListMonuments++;
+        }
+
+
         getSupportFragmentManager().beginTransaction().add(R.id.content_fragment_page_recherche,listeVillesFragment,"fragment2")
                 .add(R.id.content_fragment_page_recherche, listeSuggestionsFragment,"fragment1")
                 .show(listeSuggestionsFragment)
@@ -109,19 +122,50 @@ public class PageRechercheActivity extends AppCompatActivity implements ListeVil
             case "ville":
                 LinearLayout linearLayout=(LinearLayout) view;
                 TextView textVie=(TextView) linearLayout.findViewById(R.id.barreRecherche2);
-                Toast.makeText(myContext, String.valueOf(position)+" "+textVie.getText()+" "+nomVille, Toast.LENGTH_LONG).show();
+                //Toast.makeText(myContext, String.valueOf(position)+" "+textVie.getText()+" "+nomVille, Toast.LENGTH_LONG).show();
+                Monument monument =getMonumentByName(textVie.getText().toString());
+                Intent intent2 = new Intent(this,MonumentActivity.class);
+                intent2.putExtra("monument", monument);
+                startActivity(intent2);
                 break;
             case "Page Principale":
 
                 LinearLayout linearLayout2=(LinearLayout) view;
                 TextView textVie2=(TextView) linearLayout2.findViewById(R.id.barreRecherche2);
-                Toast.makeText(myContext, String.valueOf(position)+" "+textVie2.getText(), Toast.LENGTH_LONG).show();
+                //////////////////
+               // String nomVille=textVie2.getText().toString()
+                int positionList=getIdVille(textVie2.getText().toString().toLowerCase());
                 Intent intent = new Intent(this,VilleActivity.class);
-                intent.putExtra("nomVille",textVie2.getText());
+                // intent.putExtra("nomVille",nameVille);
+                intent.putExtra("positionList",positionList);
                 startActivity(intent);
+                /////////////////
+
                 break;
 
         }
 
+    }
+
+    private Monument getMonumentByName(String s) {
+        Monument monument=new Monument();
+        for (Monument monument2:GlobalClass.listVilleMonuments
+             ) {
+            if(monument2.getName().equals(s)){
+                monument=monument2;
+            }
+        }
+        return monument;
+    }
+
+    private int getIdVille(String s) {
+        int idVille = 0;
+        for (Ville ville:GlobalClass.listVilles) {
+            if(ville.getName().equals(s)){
+                break;
+            }
+            idVille++;
+        }
+        return idVille;
     }
 }

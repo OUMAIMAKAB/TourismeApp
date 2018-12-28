@@ -139,7 +139,7 @@ public class listeSuggestionsFragment extends Fragment {
                     startActivity(intent);
                 }
                 if(textVi.getText().equals("Centre de Changes")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    Intent intent = new Intent(getContext(), MapActivity.class);
                     intent.putExtra("choix", "Centre de Changes");
                     //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
@@ -151,14 +151,14 @@ public class listeSuggestionsFragment extends Fragment {
                     startActivity(intent);
                 }
                 if(textVi.getText().equals("Hopitaux")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    Intent intent = new Intent(getContext(), MapActivity.class);
                     intent.putExtra("choix", "Hopitaux");
                     //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
                 }
 
                 if(textVi.getText().equals("Restaurants")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    Intent intent = new Intent(getContext(), MapActivity.class);
                     intent.putExtra("choix", "Restaurants");
                     //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);
@@ -176,7 +176,7 @@ public class listeSuggestionsFragment extends Fragment {
                     startActivity(intent);
                 }
                 if(textVi.getText().equals("Pharmacies")){
-                    Intent intent = new Intent(getContext(), ContainerActivity.class);
+                    Intent intent = new Intent(getContext(), MapActivity.class);
                     intent.putExtra("choix", "Pharmacies");
                     //intent.putExtra("nomVille",nomVille);
                     startActivity(intent);

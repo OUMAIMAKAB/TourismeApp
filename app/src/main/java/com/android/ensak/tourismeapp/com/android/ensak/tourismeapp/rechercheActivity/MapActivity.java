@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,8 +22,13 @@ import android.widget.Toast;
 
 import com.android.ensak.tourismeapp.R;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.ControllerRest.GlobalClass;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.directionhelpers.FetchURL;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.directionhelpers.TaskLoadedCallback;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Banque;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.CentreDeChange;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Hopital;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Pharmacie;
+import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.modelsRest.Restaurant;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.simpleClasse.LatitudeLongitude;
 import com.android.ensak.tourismeapp.com.android.ensak.tourismeapp.test.TestSuggestionActivity;
 import com.google.android.gms.common.ConnectionResult;
@@ -38,16 +44,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener , TaskLoadedCallback {
 
     public FusedLocationProviderClient fusedLocationProviderClient;
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -55,6 +65,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     GoogleApiClient googleApiClient;
     String choix;
     ArrayList<LatitudeLongitude> listPosition;
+    Polyline currentPolyline;
+    MarkerOptions place1;
+    MarkerOptions place2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +81,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Intent intent=getIntent();
             Bundle bundle=intent.getExtras();
             choix=bundle.getString("choix");
-            afficherMarkerSelonChoix(choix);
-            initMap();
 
+
+      afficherMarkerSelonChoix(choix);
+
+            initMap();
+/*
+            place1=new MarkerOptions().position(new LatLng(27.658143,85.3199503)).title("lacoation1");
+            place2=new MarkerOptions().position(new LatLng(27.667491,85.3208503)).title("lacoation2");
+
+            String url=getUrl(place1.getPosition(),place2.getPosition(),"driving");
+            new FetchURL(MapActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
+
+*/
         } else {
             //no google maps layout
         }
@@ -98,6 +122,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     listPosition.add(new LatitudeLongitude(centreDeChange.getLatitude(),centreDeChange.getLongitude(),centreDeChange.getName(),17));
                 }
                 break;
+            case "Hopitaux":
+                for(Hopital hopital:GlobalClass.listVilleHopitals){
+                    listPosition.add(new LatitudeLongitude(hopital.getLatitude(),hopital.getLongitude(),hopital.getName(),17));
+                }
+                break;
+            case "Restaurants":
+                for(Restaurant restaurant:GlobalClass.listVilleRestaurants){
+                    listPosition.add(new LatitudeLongitude(restaurant.getLatitude(),restaurant.getLongitude(),restaurant.getName(),17));
+                }
+                break;
+            case "Pharmacies":
+                for(Pharmacie pharmacie:GlobalClass.listVillePharmacies){
+                    listPosition.add(new LatitudeLongitude(pharmacie.getLatitude(),pharmacie.getLongitude(),pharmacie.getName(),17));
+                }
+                break;
         }
     }
 
@@ -124,11 +163,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     Marker marker;
+    Circle circle;
+    Polyline line;
+
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mgoogleMap = googleMap;
-        //goToLocation(33.9691399, -6.9970062, 10);
+/*
+        mgoogleMap.addMarker(place1);
+        mgoogleMap.addMarker(place2);
+       //goToLocation(33.9691399, -6.9970062, 10);
+       */
+
         for (LatitudeLongitude latitudeLongitude: listPosition
              ) {
           goToLocation(latitudeLongitude.getLatitude(),latitudeLongitude.getLongitude(),latitudeLongitude.getZoom());
@@ -137,22 +184,61 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
             marker = mgoogleMap.addMarker(markerOptions);
+             circle= drawCircle(new LatLng(latitudeLongitude.getLatitude(),latitudeLongitude.getLongitude()));
+             LatLng latlng1=new LatLng(33.9691399,-6.9970062);
+             LatLng latLng2=new LatLng(33.9979957,-6.8768224);
+            // drawLine(latlng1,latLng2);
 
         }
+
 
 
         mgoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if(choix.equals("Carte")){
-                    marker.showInfoWindow();
-                    Toast.makeText(getApplicationContext(), "you click me" + marker.getTitle(), Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), TestSuggestionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(intent);
-                    return true;
+                switch(choix){
+                    case "Carte":
+                        marker.showInfoWindow();
+                        //Intent intent = new Intent(getApplicationContext(), TestSuggestionActivity.class);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //getApplicationContext().startActivity(intent);
+
+                        break;
+                    case "Banques":
+                        marker.showInfoWindow();
+                        //Intent intent = new Intent(getApplicationContext(),BanqueActivity.class);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //getApplicationContext().startActivity(intent);
+                        break;
+                    case "Centre de Changes":
+                        marker.showInfoWindow();
+                        //Intent intent = new Intent(getApplicationContext(), TestSuggestionActivity.class);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //getApplicationContext().startActivity(intent);
+                        break;
+                    case "Hopitaux":
+                        marker.showInfoWindow();
+                        Intent intent = new Intent(getApplicationContext(), HopitalActivity.class);
+                        intent.putExtra("nomHopital",marker.getTitle());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                        break;
+                    case "Restaurants":
+                        marker.showInfoWindow();
+                        Intent intent2 = new Intent(getApplicationContext(), RestaurantActivity.class);
+                        intent2.putExtra("nomRestaurant",marker.getTitle());
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent2);
+                        break;
+                    case "Pharmacies":
+                        marker.showInfoWindow();
+                        Intent intent3 = new Intent(getApplicationContext(), PharmacieActivity.class);
+                        intent3.putExtra("nomPharmacie",marker.getTitle());
+                        intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent3);
+                        break;
                 }
-                return false;
+                return true;
             }
         });
 
@@ -178,7 +264,52 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         googleApiClient.connect();
 */
+
+
+
+
+
     }
+
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+
+        return url;
+    }
+
+
+    private Circle drawCircle(LatLng latLng) {
+        CircleOptions options=new CircleOptions()
+                              .center(latLng)
+                              .radius(1000)
+                              .fillColor(0x33ff0000)
+                              .strokeColor(Color.BLUE)
+                              .strokeWidth(3);
+        return mgoogleMap.addCircle(options);
+
+    }
+
+    private void drawLine(LatLng lng1,LatLng lng2){
+
+        PolylineOptions options=new PolylineOptions()
+                .add(lng1)
+                .add(lng2)
+                .color(Color.BLUE)
+                .width(3);
+        line=mgoogleMap.addPolyline(options);
+    }
+
 
     private void goToLocation(double lat, double lng, float zoom) {
         LatLng ll = new LatLng(lat, lng);
@@ -267,5 +398,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll,15);
             mgoogleMap.animateCamera(update);
         }
+    }
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mgoogleMap.addPolyline((PolylineOptions) values[0]);
     }
 }

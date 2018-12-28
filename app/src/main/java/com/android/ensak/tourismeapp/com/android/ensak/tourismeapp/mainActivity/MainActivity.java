@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity implements BareRechercheFrag
         setContentView(R.layout.activity_main);
         fragment = (BareRechercheFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
         fragment.setMode("Page Principale");
-        ControllerRestVillesClass controllerRestVillesClass=ControllerRestVillesClass.getInstanceControllerRestClass();
+       ControllerRestVillesClass controllerRestVillesClass=ControllerRestVillesClass.getInstanceControllerRestClass();
         controllerRestVillesClass.listVillesAsync();
+
 
          defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements BareRechercheFrag
         config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .defaultDisplayImageOptions(defaultOptions)
                 .build();
+
     }
 
 

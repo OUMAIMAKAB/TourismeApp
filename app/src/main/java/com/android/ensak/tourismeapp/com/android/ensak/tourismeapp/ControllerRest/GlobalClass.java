@@ -31,8 +31,11 @@ public class GlobalClass {
     public static List<Utilisateur> listUtilisateurs= new ArrayList<Utilisateur>();
     public static Utilisateur user;
     public static Utilisateur userUpdate;
-    public static String urlServerImages= "http://192.168.1.4:8085/images";
+    public static String urlServerImages= "http://192.168.1.2:8085/images";
     public static int idPositionVilleCourante;
+    public static List<Ville> listVillesTourisques=new ArrayList<Ville>();
+    public static List<Ville> listVillesInUnesco=new ArrayList<Ville>();
+
 
 
 

@@ -47,6 +47,41 @@ public class ControllerRestVillesClass {
         });
     }
 
+    public void listVilleTouristiquesAsync(){
+        tourismeAppService.listVilleTouristiquesAsync(new Callback<List<Ville>>() {
+            @Override
+            public void success(List<Ville> villes, Response response) {
+                listVillesTouristiques(villes);
+
+            }
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+    public void listVilleInUnescoAsync(){
+        tourismeAppService.listVilleInUnescoAsync(new Callback<List<Ville>>() {
+            @Override
+            public void success(List<Ville> villes, Response response) {
+                listVillesInUnesco(villes);
+
+            }
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    private void listVillesTouristiques(List<Ville> villes) {
+        GlobalClass.listVillesTourisques=villes;
+    }
+
+    private void listVillesInUnesco(List<Ville> villes){
+        GlobalClass.listVillesInUnesco=villes;
+    }
+
     private void listVilles(List<Ville> villes) {
         GlobalClass.listVilles=villes;
      //  ControllerRestVillesClass.villes=villes;
